@@ -20,9 +20,9 @@ jobs:
 
     - name: Deploy to EC2
       run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.USER }}@${{ secrets.HOST }} << 'EOF'
-          cd /home/${{secrets.USER}}/test-project
-          git pull origin main
-          npm install
-          pm2 restart  express-backend || pm2 start index.js --name express-backend
-        EOF
+        ssh -o StrictHostKeyChecking=no ${{ secrets.USER }}@${{ secrets.HOST }} "\
+          cd /home/${{ secrets.USER }}/test-project && \
+          git pull origin main && \
+          npm install && \
+          pm2 restart express-backend || pm2 start index.js --name express-backend \
+        "
